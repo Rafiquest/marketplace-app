@@ -1,0 +1,16 @@
+<h1>Messages from Buyers</h1>
+<%= link_to "⬅️ Back to Dashboard", sellers_dashboard_path, class: "text-blue-600 underline block mb-4" %>
+
+
+<% if @messages.present? %>
+  <% @messages.each do |message| %>
+    <div class="message-card">
+      <p><strong>Listing:</strong> <%= message.listing.name %></p>
+      <p><strong>From Buyer:</strong> <%= message.buyer.email %></p>
+      <p><strong>Message:</strong> <%= message.content %></p>
+      <p><strong>Sent at:</strong> <%= message.created_at.strftime("%d %b %Y %I:%M %p") %></p>
+    </div>
+  <% end %>
+<% else %>
+  <p>No messages found.</p>
+<% end %>

@@ -1,0 +1,18 @@
+<h1>My Listings</h1>
+
+<%= link_to "New Listing", new_listing_path, class: "btn btn-primary" %>
+
+<% @listings.each do |listing| %>
+  <div class="listing-box">
+    <h3><%= listing.name %></h3>
+    <p><strong>Price:</strong> ₹<%= listing.price %></p>
+    <p><%= listing.description %></p>
+
+    <% if listing.image.attached? %>
+      <%= image_tag listing.image, width: 150 %>
+    <% end %>
+
+    <%= link_to "Edit", edit_listing_path(listing), class: "btn" %>
+    <%= link_to "Delete", listing_path(listing), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+  </div>
+<% end %>

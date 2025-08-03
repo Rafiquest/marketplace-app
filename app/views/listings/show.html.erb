@@ -1,0 +1,21 @@
+<h1><%= @listing.name %></h1>
+<p><strong>Description:</strong> <%= @listing.description %></p>
+<p><strong>Price:</strong> ₹<%= @listing.price %></p>
+<p><strong>Category:</strong> <%= @listing.category %></p>
+
+<% if @listing.image.attached? %>
+  <%= image_tag @listing.image, width: "300" %>
+<% end %>
+
+<% if current_user&.buyer? %>
+  <h2>Contact Seller</h2>
+  <%= form_with url: contact_listing_path(@listing), method: :post do %>
+    <div>
+      <%= label_tag :message, "Your Message" %><br>
+      <%= text_area_tag :message, nil, rows: 5, cols: 50 %>
+    </div>
+    <div>
+      <%= submit_tag "Send Message" %>
+    </div>
+  <% end %>
+<% end %>

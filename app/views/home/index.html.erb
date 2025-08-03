@@ -1,0 +1,41 @@
+<h1>Welcome to Marketplace V4</h1>
+
+<% if user_signed_in? %>
+  <p>Hello, <%= current_user.email %>!</p>
+  <p>You are logged in as: <strong><%= current_user.role.capitalize %></strong></p>
+
+  <% if current_user.buyer? %>
+    <p>Click <a href="/">Home</a> again to refresh your dashboard.</p>
+  <% else %>
+    <p>Your seller dashboard is coming soon!</p>
+  <% end %>
+<% else %>
+  <p>Please <%= link_to "Sign in", new_user_session_path %> or <%= link_to "Sign up", new_user_registration_path %>.</p>
+<% end %>
+
+<!-- ✅ FILTER / SEARCH / SORT FORM BELOW -->
+<div class="filters mb-4 p-3 bg-light border rounded">
+<%= form_with url: listings_path, method: :get, local: true do %>
+  <%= select_tag :category, options_for_select(Listing::CATEGORIES.map { |c| [c.titleize, c] }, params[:category]), prompt: "Filter by Category" %>
+
+  <%= select_tag :sort, options_for_select([["Price Low to High", "asc"], ["Price High to Low", "desc"]], params[:sort]), prompt: "Sort by Price" %>
+
+  <%= text_field_tag :search, params[:search], placeholder: "Search..." %>
+
+  <%= submit_tag "Apply", class: "btn btn-primary" %>
+<% end %>
+</div>
+<!-- ✅ You can now list the actual results below this -->
+<% @listings.each do |listing| %>
+  <div class="listing-card">
+    <h3><%= listing.name %></h3>
+    <p><%= listing.description %></p>
+    <p>Price: ₹<%= listing.price %></p>
+    <p><strong>Category:</strong> 
+  <%= listing.category.present? ? listing.category.to_s.titleize : "Uncategorized" %>
+</p>
+<% if listing.image.attached? %>
+      <%= image_tag listing.image.variant(resize_to_limit: [300, 300]) %>
+    <% end %>
+  </div>
+<% end %>
