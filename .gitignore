@@ -8,7 +8,8 @@
 /.bundle
 
 # Ignore all environment files.
-/.env*
+/env*
+.env*
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -32,3 +33,52 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Ruby and gem-specific
+*.gem
+*.rbc
+/.config
+/coverage/
+InstalledFiles
+/pkg/
+/spec/reports/
+/spec/examples.txt
+/test/tmp/
+/test/version_tmp/
+/tmp/
+
+# Ignore Byebug command history file.
+.byebug_history
+
+# RubyMotion specific
+.dat*
+.repl_history
+build/
+*.bridgesupport
+build-iPhoneOS/
+build-iPhoneSimulator/
+
+# RubyMotion with CocoaPods
+# vendor/Pods/
+
+# Documentation cache and generated files:
+/.yardoc/
+/_yardoc/
+/doc/
+/rdoc/
+
+# Environment normalization:
+/.bundle/
+/vendor/bundle
+/lib/bundler/man/
+
+# Optional Git ignore
+# Gemfile.lock
+# .ruby-version
+# .ruby-gemset
+
+# Ignore for RVM
+.rvmrc
+
+# Used by RuboCop
+# .rubocop-https?--*
